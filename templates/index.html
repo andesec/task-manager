@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Task Manager</h1>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="/add" method="post">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="title" placeholder="Add a new task" required>
+                        <button class="btn btn-primary" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <h2>Pending Tasks</h2>
+        <ul class="list-group mb-4">
+            {% for task in pending_tasks %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ task.title }}
+                <div>
+                    <a href="/complete/{{ task.id }}" class="btn btn-success btn-sm">Complete</a>
+                    <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Completed Tasks</h2>
+        <ul class="list-group">
+            {% for task in completed_tasks %}
+            <li class="list-group-item text-muted text-decoration-line-through">
+                {{ task.title }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

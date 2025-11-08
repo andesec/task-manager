@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://user:password@db/taskmanager
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=taskmanager
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+volumes:
+  postgres_data:
