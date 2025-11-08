@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String, Date
 from database import Base
 
 class Task(Base):
@@ -6,4 +6,6 @@ class Task(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
+    description = Column(String, nullable=True)
+    deadline = Column(Date, nullable=True)
     completed = Column(Boolean, default=False)
